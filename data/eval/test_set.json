@@ -1,146 +1,146 @@
 [
   {
-    "id": "summary-001-10-1007-s00262-026-04505-w",
+    "id": "summary-001-10-1007-s10278-026-02086-9",
     "question_type": "summary",
-    "question": "What is the main idea of 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis'?",
-    "ground_truth": "Peritoneal metastasis from gastrointestinal cancers has poor outcomes, and whole-abdominal radiotherapy (RT) is limited by toxicity to radiosensitive organs.",
+    "question": "What is the main idea of 'JADE-Plus: A Multimodal Agentic Retrieval-Augmented Generation Large Language Framework for Diagnostic Support in Jawbone Lesions: Development and Technical Validation Study'?",
+    "ground_truth": "Diagnosing jawbone lesions in oral and maxillofacial radiology remains challenging due to overlapping radiological features and the need for integrated clinical reasoning.",
     "ground_truth_doc_ids": [
-      "10.1007/s00262-026-04505-w"
+      "10.1007/s10278-026-02086-9"
     ]
   },
   {
-    "id": "authors-002-10-1007-s00262-026-04505-w",
+    "id": "authors-002-10-1007-s10278-026-02086-9",
     "question_type": "authors",
-    "question": "Who authored 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis'?",
-    "ground_truth": "Sung Eun Lee, Changhoon Choi, Yeeun Kim, Taehyung Kim, Sung Jin Kim, Sang Hoon Jung, Jeong Il Yu",
+    "question": "Who authored 'JADE-Plus: A Multimodal Agentic Retrieval-Augmented Generation Large Language Framework for Diagnostic Support in Jawbone Lesions: Development and Technical Validation Study'?",
+    "ground_truth": "Soroush Baseri Saadi, Jonas Ver Berne, Rocharles Cavalcante Fontenele, Peter Claes, Reinhilde Jacobs",
     "ground_truth_doc_ids": [
-      "10.1007/s00262-026-04505-w"
+      "10.1007/s10278-026-02086-9"
     ]
   },
   {
-    "id": "date-003-10-1007-s00262-026-04505-w",
+    "id": "date-003-10-1007-s10278-026-02086-9",
     "question_type": "date",
-    "question": "When was 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis' published?",
-    "ground_truth": "2026-08-06",
+    "question": "When was 'JADE-Plus: A Multimodal Agentic Retrieval-Augmented Generation Large Language Framework for Diagnostic Support in Jawbone Lesions: Development and Technical Validation Study' published?",
+    "ground_truth": "2026-07-13",
     "ground_truth_doc_ids": [
-      "10.1007/s00262-026-04505-w"
+      "10.1007/s10278-026-02086-9"
     ]
   },
   {
-    "id": "categories-004-10-1007-s00262-026-04505-w",
+    "id": "categories-004-10-1007-s10278-026-02086-9",
     "question_type": "categories",
-    "question": "What categories does 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis' belong to?",
-    "ground_truth": "Cancer Immunology, Immunotherapy, journal-article",
+    "question": "What categories does 'JADE-Plus: A Multimodal Agentic Retrieval-Augmented Generation Large Language Framework for Diagnostic Support in Jawbone Lesions: Development and Technical Validation Study' belong to?",
+    "ground_truth": "Journal of Imaging Informatics in Medicine, journal-article",
     "ground_truth_doc_ids": [
-      "10.1007/s00262-026-04505-w"
+      "10.1007/s10278-026-02086-9"
     ]
   },
   {
-    "id": "summary-005-10-1007-s44020-026-00124-1",
+    "id": "summary-005-10-2196-preprints-106157",
     "question_type": "summary",
-    "question": "What is the main idea of 'The \u2018how long\u2019 question: EAL students\u2019 progression through phases of English language development in Australian schools'?",
-    "ground_truth": "This article addresses the question of how long it takes students who are learning English as an additional language (EAL) in the Australian context to develop the level of English necessary for equitable participation in the curriculum.",
+    "question": "What is the main idea of 'Does retrieval-augmented generation impact medical students\u2019 perceptions of large language models? (Preprint)'?",
+    "ground_truth": "BACKGROUND There is evidence of rapid adoption of large language models (LLMs) in undergraduate medical education, with medical students using it to support their learning.",
     "ground_truth_doc_ids": [
-      "10.1007/s44020-026-00124-1"
+      "10.2196/preprints.106157"
     ]
   },
   {
-    "id": "authors-006-10-1007-s44020-026-00124-1",
+    "id": "authors-006-10-2196-preprints-106157",
     "question_type": "authors",
-    "question": "Who authored 'The \u2018how long\u2019 question: EAL students\u2019 progression through phases of English language development in Australian schools'?",
-    "ground_truth": "Lucy Lu, Jennifer Hammond, Olivia Groves, Wai Yin Wan",
+    "question": "Who authored 'Does retrieval-augmented generation impact medical students\u2019 perceptions of large language models? (Preprint)'?",
+    "ground_truth": "Rohin Athavale, Alexander Cresswell, Alice Huffman",
     "ground_truth_doc_ids": [
-      "10.1007/s44020-026-00124-1"
+      "10.2196/preprints.106157"
     ]
   },
   {
-    "id": "date-007-10-1007-s44020-026-00124-1",
+    "id": "date-007-10-2196-preprints-106157",
     "question_type": "date",
-    "question": "When was 'The \u2018how long\u2019 question: EAL students\u2019 progression through phases of English language development in Australian schools' published?",
-    "ground_truth": "2026-08-06",
+    "question": "When was 'Does retrieval-augmented generation impact medical students\u2019 perceptions of large language models? (Preprint)' published?",
+    "ground_truth": "2026-07-03",
     "ground_truth_doc_ids": [
-      "10.1007/s44020-026-00124-1"
+      "10.2196/preprints.106157"
     ]
   },
   {
-    "id": "categories-008-10-1007-s44020-026-00124-1",
+    "id": "categories-008-10-2196-preprints-106157",
     "question_type": "categories",
-    "question": "What categories does 'The \u2018how long\u2019 question: EAL students\u2019 progression through phases of English language development in Australian schools' belong to?",
-    "ground_truth": "The Australian Journal of Language and Literacy, journal-article",
+    "question": "What categories does 'Does retrieval-augmented generation impact medical students\u2019 perceptions of large language models? (Preprint)' belong to?",
+    "ground_truth": "posted-content",
     "ground_truth_doc_ids": [
-      "10.1007/s44020-026-00124-1"
+      "10.2196/preprints.106157"
     ]
   },
   {
-    "id": "summary-009-10-1093-9780197900413-003-0003",
+    "id": "summary-009-10-3390-buildings16132637",
     "question_type": "summary",
-    "question": "What is the main idea of 'The Mixture Model of Politics'?",
-    "ground_truth": "This chapter develops the mixture model of politics.",
+    "question": "What is the main idea of 'An Agentic AI System for Roof Design Compliance Using Computer Vision, Retrieval-Augmented Generation and Large Language Models'?",
+    "ground_truth": "Designers, engineers, and building officials face increasing pressure to accelerate and improve the accuracy of design review for buildings and infrastructure.",
     "ground_truth_doc_ids": [
-      "10.1093/9780197900413.003.0003"
+      "10.3390/buildings16132637"
     ]
   },
   {
-    "id": "authors-010-10-1093-9780197900413-003-0003",
+    "id": "authors-010-10-3390-buildings16132637",
     "question_type": "authors",
-    "question": "Who authored 'The Mixture Model of Politics'?",
-    "ground_truth": "Jens Ledet Jensen, Peter B Mortensen, S\u00f8ren Serritzlew",
+    "question": "Who authored 'An Agentic AI System for Roof Design Compliance Using Computer Vision, Retrieval-Augmented Generation and Large Language Models'?",
+    "ground_truth": "Nawari O. Nawari, Oluwatoyin O. Lawal",
     "ground_truth_doc_ids": [
-      "10.1093/9780197900413.003.0003"
+      "10.3390/buildings16132637"
     ]
   },
   {
-    "id": "date-011-10-1093-9780197900413-003-0003",
+    "id": "date-011-10-3390-buildings16132637",
     "question_type": "date",
-    "question": "When was 'The Mixture Model of Politics' published?",
-    "ground_truth": "2026-08-06",
+    "question": "When was 'An Agentic AI System for Roof Design Compliance Using Computer Vision, Retrieval-Augmented Generation and Large Language Models' published?",
+    "ground_truth": "2026-07-02",
     "ground_truth_doc_ids": [
-      "10.1093/9780197900413.003.0003"
+      "10.3390/buildings16132637"
     ]
   },
   {
-    "id": "categories-012-10-1093-9780197900413-003-0003",
+    "id": "categories-012-10-3390-buildings16132637",
     "question_type": "categories",
-    "question": "What categories does 'The Mixture Model of Politics' belong to?",
-    "ground_truth": "Understanding Policy Changes, book-chapter",
+    "question": "What categories does 'An Agentic AI System for Roof Design Compliance Using Computer Vision, Retrieval-Augmented Generation and Large Language Models' belong to?",
+    "ground_truth": "Buildings, journal-article",
     "ground_truth_doc_ids": [
-      "10.1093/9780197900413.003.0003"
+      "10.3390/buildings16132637"
     ]
   },
   {
-    "id": "summary-013-10-1093-9780197900413-003-0004",
+    "id": "summary-013-10-21079-11681-50309",
     "question_type": "summary",
-    "question": "What is the main idea of 'The Comparative Distributional Method'?",
-    "ground_truth": "The chapter introduces the Comparative Distributional Method (CDM) as a statistical approach for analysing policy change distributions.",
+    "question": "What is the main idea of 'Microsoft Azure artificial intelligence / machine learning hackathon for development of retrieval-augmented generation large language model'?",
+    "ground_truth": "The US Army Corps of Engineers (USACE) Civil Works (CW) research and development (R&D) mission is to address challenging environmental sustainability problems through innovative science and engineering, which helps to ensure a safer, more prosperous, and more resilient nation.",
     "ground_truth_doc_ids": [
-      "10.1093/9780197900413.003.0004"
+      "10.21079/11681/50309"
     ]
   },
   {
-    "id": "authors-014-10-1093-9780197900413-003-0004",
+    "id": "authors-014-10-21079-11681-50309",
     "question_type": "authors",
-    "question": "Who authored 'The Comparative Distributional Method'?",
-    "ground_truth": "Jens Ledet Jensen, Peter B Mortensen, S\u00f8ren Serritzlew",
+    "question": "Who authored 'Microsoft Azure artificial intelligence / machine learning hackathon for development of retrieval-augmented generation large language model'?",
+    "ground_truth": "Janet L. Autrey, Lacey S. Duckworth, Ashly N. Horner, Thomas Sigler, Victoria D. Moore",
     "ground_truth_doc_ids": [
-      "10.1093/9780197900413.003.0004"
+      "10.21079/11681/50309"
     ]
   },
   {
-    "id": "date-015-10-1093-9780197900413-003-0004",
+    "id": "date-015-10-21079-11681-50309",
     "question_type": "date",
-    "question": "When was 'The Comparative Distributional Method' published?",
-    "ground_truth": "2026-08-06",
+    "question": "When was 'Microsoft Azure artificial intelligence / machine learning hackathon for development of retrieval-augmented generation large language model' published?",
+    "ground_truth": "2026-07-01",
     "ground_truth_doc_ids": [
-      "10.1093/9780197900413.003.0004"
+      "10.21079/11681/50309"
     ]
   },
   {
-    "id": "categories-016-10-1093-9780197900413-003-0004",
+    "id": "categories-016-10-21079-11681-50309",
     "question_type": "categories",
-    "question": "What categories does 'The Comparative Distributional Method' belong to?",
-    "ground_truth": "Understanding Policy Changes, book-chapter",
+    "question": "What categories does 'Microsoft Azure artificial intelligence / machine learning hackathon for development of retrieval-augmented generation large language model' belong to?",
+    "ground_truth": "report",
     "ground_truth_doc_ids": [
-      "10.1093/9780197900413.003.0004"
+      "10.21079/11681/50309"
     ]
   }
 ]

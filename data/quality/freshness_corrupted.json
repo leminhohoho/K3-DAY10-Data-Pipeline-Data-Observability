@@ -1,10 +1,10 @@
 {
-  "latest_published": "2026-08-06T00:00:00+00:00",
-  "oldest_published": "2021-08-06T00:00:00+00:00",
-  "stale_rows": 3,
-  "fresh_rows": 21,
-  "total_rows": 24,
+  "latest_published": "2026-07-01T00:00:00+00:00",
+  "oldest_published": "2020-12-30T00:00:00+00:00",
+  "stale_rows": 4,
+  "fresh_rows": 18,
+  "total_rows": 22,
   "is_fresh": false,
-  "threshold_days": 180,
-  "generated_at_utc": "2026-08-06T05:57:38.002907+00:00"
+  "threshold_days": 365,
+  "generated_at_utc": "2026-08-06T10:22:39.726266+00:00"
 }

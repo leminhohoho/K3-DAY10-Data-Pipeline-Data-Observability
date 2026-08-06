@@ -1,67 +1,72 @@
 {
   "report_name": "repaired",
-  "checked_at": "2026-08-06T05:58:30.152683+00:00",
-  "total_rows": 24,
+  "checked_at": "2026-08-06T10:22:39.731424+00:00",
+  "total_rows": 23,
   "checks": {
     "row_count": {
       "status": "pass",
-      "value": 24,
-      "detail": "24 rows total"
+      "value": 23,
+      "detail": "23 rows total"
+    },
+    "record_coverage": {
+      "status": "pass",
+      "value": 23,
+      "detail": "0/23 expected paper_ids missing from corpus"
     },
     "paper_id_not_null": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows missing or empty paper_id"
+      "value": 23,
+      "detail": "0/23 rows missing or empty paper_id"
     },
     "paper_id_unique": {
       "status": "pass",
-      "value": 24,
+      "value": 23,
       "detail": "0 rows belong to duplicated paper_id groups"
     },
     "title_not_null": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows missing or empty title"
+      "value": 23,
+      "detail": "0/23 rows missing or empty title"
     },
     "summary_length": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows with summary shorter than 20 chars"
+      "value": 23,
+      "detail": "0/23 rows with summary shorter than 20 chars"
     },
     "summary_chars_consistency": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows have inconsistent summary_chars"
+      "value": 23,
+      "detail": "0/23 rows have inconsistent summary_chars"
     },
     "published_valid": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows have an invalid published date"
+      "value": 23,
+      "detail": "0/23 rows have an invalid published date"
     },
     "age_days_consistency": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows have age_days inconsistent with published"
+      "value": 23,
+      "detail": "0/23 rows have age_days inconsistent with published"
     },
     "embedding_text_consistency": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows have stale text_for_embedding"
+      "value": 23,
+      "detail": "0/23 rows have stale text_for_embedding"
     },
     "noise_free": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows contain known corruption noise"
+      "value": 23,
+      "detail": "0/23 rows contain known corruption noise"
     },
     "title_not_truncated": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 titles end with the corruption truncation marker"
+      "value": 23,
+      "detail": "0/23 titles end with the corruption truncation marker"
     },
     "freshness": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows stale (> 180 days old)"
+      "value": 23,
+      "detail": "0/23 rows stale (> 365 days old)"
     }
   },
   "failed_checks": [],

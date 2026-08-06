@@ -1,70 +1,76 @@
 {
   "report_name": "corrupted",
-  "checked_at": "2026-08-06T05:57:37.992807+00:00",
-  "total_rows": 24,
+  "checked_at": "2026-08-06T10:22:39.723520+00:00",
+  "total_rows": 22,
   "checks": {
     "row_count": {
       "status": "pass",
-      "value": 24,
-      "detail": "24 rows total"
+      "value": 22,
+      "detail": "22 rows total"
+    },
+    "record_coverage": {
+      "status": "fail",
+      "value": 20,
+      "detail": "3/23 expected paper_ids missing from corpus: 10.1007/s10278-026-02086-9, 10.2196/preprints.106157, 10.3390/buildings16132637"
     },
     "paper_id_not_null": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows missing or empty paper_id"
+      "value": 22,
+      "detail": "0/22 rows missing or empty paper_id"
     },
     "paper_id_unique": {
       "status": "fail",
-      "value": 21,
-      "detail": "6 rows belong to duplicated paper_id groups"
+      "value": 20,
+      "detail": "4 rows belong to duplicated paper_id groups"
     },
     "title_not_null": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows missing or empty title"
+      "value": 22,
+      "detail": "0/22 rows missing or empty title"
     },
     "summary_length": {
       "status": "fail",
-      "value": 21,
-      "detail": "3/24 rows with summary shorter than 20 chars"
+      "value": 20,
+      "detail": "2/22 rows with summary shorter than 20 chars"
     },
     "summary_chars_consistency": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows have inconsistent summary_chars"
+      "value": 22,
+      "detail": "0/22 rows have inconsistent summary_chars"
     },
     "published_valid": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows have an invalid published date"
+      "value": 22,
+      "detail": "0/22 rows have an invalid published date"
     },
     "age_days_consistency": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows have age_days inconsistent with published"
+      "value": 22,
+      "detail": "0/22 rows have age_days inconsistent with published"
     },
     "embedding_text_consistency": {
       "status": "pass",
-      "value": 24,
-      "detail": "0/24 rows have stale text_for_embedding"
+      "value": 22,
+      "detail": "0/22 rows have stale text_for_embedding"
     },
     "noise_free": {
       "status": "fail",
       "value": 20,
-      "detail": "4/24 rows contain known corruption noise"
+      "detail": "2/22 rows contain known corruption noise"
     },
     "title_not_truncated": {
       "status": "fail",
-      "value": 21,
-      "detail": "3/24 titles end with the corruption truncation marker"
+      "value": 20,
+      "detail": "2/22 titles end with the corruption truncation marker"
     },
     "freshness": {
       "status": "fail",
-      "value": 21,
-      "detail": "3/24 rows stale (> 180 days old)"
+      "value": 18,
+      "detail": "4/22 rows stale (> 365 days old)"
     }
   },
   "failed_checks": [
+    "record_coverage",
     "paper_id_unique",
     "summary_length",
     "noise_free",

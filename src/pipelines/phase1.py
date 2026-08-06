@@ -3,8 +3,6 @@ from __future__ import annotations
 from datetime import datetime
 import json
 from pathlib import Path
-import re
-import time
 from typing import Any
 
 import pandas as pd
@@ -17,7 +15,7 @@ from ingestion.cleaning import build_clean_dataframe
 from ingestion.crossref import PaperRecord, fetch_source_records, load_raw_records
 from observability.quality import build_freshness_report, run_data_quality_checks
 from observability.reporting import generate_phase1_report
-from retrieval.agent import build_agent, run_agent_question
+from retrieval.agent import answer_with_agent, build_agent
 from retrieval.index import LocalEmbeddingIndex
 from retrieval.qa import answer_question
 
@@ -41,23 +39,6 @@ _REQUIRED_TESTSET_KEYS = {
     "ground_truth",
     "ground_truth_doc_ids",
 }
-# Free-tier LLM endpoints throttle aggressively; the agent demo retries the
-# transient statuses instead of losing the evidence artifact to one 429.
-_AGENT_RETRY_ATTEMPTS = 3
-_AGENT_RETRY_BACKOFF_SECONDS = 15.0
-_AGENT_RETRY_MAX_DELAY_SECONDS = 60.0
-_RETRYABLE_ERROR_MARKERS = (
-    "429",
-    "RESOURCE_EXHAUSTED",
-    "500",
-    "INTERNAL",
-    "503",
-    "UNAVAILABLE",
-    "504",
-    "DEADLINE_EXCEEDED",
-)
-
-
 def _dataframe_records(df: pd.DataFrame) -> list[dict[str, Any]]:
     """Return JSON-safe records without leaking pandas/numpy scalar types."""
     return json.loads(df.to_json(orient="records", force_ascii=False, date_format="iso"))
@@ -161,46 +142,6 @@ def _agent_credentials_status(settings: Settings) -> tuple[bool, str | None]:
     return True, None
 
 
-def _normalize_agent_text(value: Any) -> str:
-    """Flatten a LangChain message payload, which may be text or content blocks."""
-    if isinstance(value, str):
-        return value.strip()
-    if isinstance(value, list):
-        parts: list[str] = []
-        for block in value:
-            if isinstance(block, str):
-                parts.append(block)
-            elif isinstance(block, dict) and isinstance(block.get("text"), str):
-                parts.append(block["text"])
-        return "\n".join(part for part in parts if part).strip()
-    return str(value).strip()
-
-
-def _retry_delay_seconds(error: Exception, attempt: int) -> float | None:
-    """Seconds to wait before retrying, or None when the failure is permanent."""
-    message = str(error)
-    if not any(marker in message for marker in _RETRYABLE_ERROR_MARKERS):
-        return None
-    hinted = re.search(r"'retryDelay': '(\d+(?:\.\d+)?)s'", message)
-    delay = float(hinted.group(1)) + 1.0 if hinted else _AGENT_RETRY_BACKOFF_SECONDS * attempt
-    return min(delay, _AGENT_RETRY_MAX_DELAY_SECONDS)
-
-
-def _run_agent_question(agent: Any, question: str) -> tuple[str | None, str | None]:
-    """Return (answer, error) for one agent question, retrying transient failures."""
-    last_error: Exception | None = None
-    for attempt in range(1, _AGENT_RETRY_ATTEMPTS + 1):
-        try:
-            return _normalize_agent_text(run_agent_question(agent, question)), None
-        except Exception as error:
-            last_error = error
-            delay = _retry_delay_seconds(error, attempt)
-            if delay is None or attempt == _AGENT_RETRY_ATTEMPTS:
-                break
-            time.sleep(delay)
-    return None, f"{type(last_error).__name__}: {last_error}"
-
-
 def _build_demo_answers(
     settings: Settings,
     index: LocalEmbeddingIndex,
@@ -243,7 +184,7 @@ def _build_demo_answers(
         else:
             failures = 0
             for sample in samples:
-                answer, error = _run_agent_question(agent, sample["question"])
+                answer, error = answer_with_agent(agent, sample["question"])
                 sample["agent_answer"] = answer
                 sample["agent_error"] = error
                 if error is not None:
@@ -347,7 +288,12 @@ def main() -> None:
         answers_output_path=paths.baseline_answers,
     )
 
-    quality = run_data_quality_checks(clean_df, settings, report_name="baseline")
+    quality = run_data_quality_checks(
+        clean_df,
+        settings,
+        report_name="baseline",
+        expected_paper_ids=set(clean_df["paper_id"].astype(str)),
+    )
     freshness = build_freshness_report(clean_df, settings, paths.freshness_report)
 
     demo = _build_demo_answers(settings, index, test_set)

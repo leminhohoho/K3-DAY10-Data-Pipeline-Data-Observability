@@ -70,9 +70,14 @@ class Settings:
 def load_settings(project_dir: Path | None = None) -> Settings:
     root = (project_dir or Path(__file__).resolve().parents[2]).resolve()
     workspace = root.parent
-    freshness_threshold_days = 180
+    # Source window va freshness threshold cung ~1 nam: corpus co ngay xuat ban da
+    # dang (khong con dinh mot ngay) nhung baseline van "fresh" -> baseline la mocc
+    # sach, con kich ban stale_published_date (lui 5 nam) moi lam freshness fail.
+    # Nho vay bao cao ba trang thai co cau chuyen fresh -> stale -> fresh ro rang.
+    source_lookback_days = 365
+    freshness_threshold_days = source_lookback_days
     today = datetime.now(UTC).date()
-    source_from_date = (today - timedelta(days=freshness_threshold_days)).isoformat()
+    source_from_date = (today - timedelta(days=source_lookback_days)).isoformat()
     # Crossref tra ve ca cac so bao da len lich xuat ban trong tuong lai (vi du 2028-06-15).
     # Cleaning loai bo moi record co published > run_date, nen thieu chan tren se lam
     # clean dataframe rong hoan toan. `until-pub-date` giu lai dung cac paper da xuat ban.

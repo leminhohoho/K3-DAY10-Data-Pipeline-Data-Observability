@@ -218,7 +218,11 @@ def fetch_source_records(settings: Settings) -> list[PaperRecord]:
         "query.bibliographic": settings.source_query,
         "filter": settings.source_filter,
         "rows": settings.max_results,
-        "sort": "published",
+        # Sort by relevance (not published date) so the corpus actually matches
+        # the RAG query. `sort=published desc` returned the newest papers
+        # regardless of topic, which both mismatched the query and clustered every
+        # record on a single publication date.
+        "sort": "relevance",
         "order": "desc",
     }
 

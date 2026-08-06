@@ -93,12 +93,17 @@ def run_corruption_flow(
 
     run_date = infer_run_date_from_clean_dataframe(baseline_df)
 
+    # The baseline paper_ids define the coverage contract for every later state,
+    # so a dropped-record corruption is caught by the quality report itself.
+    baseline_paper_ids = set(baseline_df["paper_id"].astype(str))
+
     # Baseline observability is recomputed with the same check implementation so
     # the comparison table is methodologically consistent.
     baseline_quality = run_data_quality_checks(
         baseline_df,
         effective_settings,
         report_name="baseline-for-corruption-comparison",
+        expected_paper_ids=baseline_paper_ids,
     )
     baseline_freshness = build_freshness_report(
         baseline_df,
@@ -149,6 +154,7 @@ def run_corruption_flow(
         corrupted_df,
         effective_settings,
         report_name="corrupted",
+        expected_paper_ids=baseline_paper_ids,
     )
     corrupted_freshness = build_freshness_report(
         corrupted_df,
@@ -193,6 +199,7 @@ def run_corruption_flow(
         repaired_df,
         effective_settings,
         report_name="repaired",
+        expected_paper_ids=baseline_paper_ids,
     )
     repaired_freshness = build_freshness_report(
         repaired_df,

@@ -21,6 +21,36 @@ def _present_count(df: pd.DataFrame, column: str) -> int:
     return int(df.loc[mask, column].astype(str).str.strip().ne("").sum(skipna=True))
 
 
+def _record_coverage_check(
+    df: pd.DataFrame,
+    expected_paper_ids: set[str],
+) -> dict[str, Any]:
+    """Detect missing records directly: which expected paper_ids are absent.
+
+    ``row_count`` only proves the corpus is non-empty; a dropped-records
+    corruption still passes it. This check compares the corpus against the set
+    of paper_ids it is supposed to contain (typically the clean baseline), so a
+    ``drop_latest_records`` scenario surfaces as a quality failure instead of
+    silently shrinking the corpus.
+    """
+    expected = {str(paper_id).strip().casefold() for paper_id in expected_paper_ids if str(paper_id).strip()}
+    if "paper_id" in df.columns:
+        present = {
+            value
+            for value in df["paper_id"].fillna("").astype(str).str.strip().str.casefold()
+            if value
+        }
+    else:
+        present = set()
+    missing = sorted(expected - present)
+    return {
+        "status": "pass" if not missing else "fail",
+        "value": len(expected & present),
+        "detail": f"{len(missing)}/{len(expected)} expected paper_ids missing from corpus"
+        + (f": {', '.join(missing[:8])}" if missing else ""),
+    }
+
+
 def _not_null_check(df: pd.DataFrame, column: str, total: int) -> dict[str, Any]:
     present = _present_count(df, column)
     missing = total - present
@@ -204,8 +234,15 @@ def run_data_quality_checks(
     df: pd.DataFrame,
     settings: Settings,
     report_name: str,
+    expected_paper_ids: set[str] | None = None,
 ) -> dict[str, Any]:
-    """Run reproducible quality checks and persist the JSON artifact."""
+    """Run reproducible quality checks and persist the JSON artifact.
+
+    When ``expected_paper_ids`` is provided (typically the clean baseline's
+    paper_ids), a ``record_coverage`` check flags any expected record missing
+    from the corpus, so dropped-record corruption is detected directly by the
+    quality report rather than only by the corruption validator.
+    """
     total = int(len(df))
     checks: dict[str, dict[str, Any]] = {
         "row_count": {
@@ -213,6 +250,10 @@ def run_data_quality_checks(
             "value": total,
             "detail": f"{total} rows total",
         },
+    }
+    if expected_paper_ids is not None:
+        checks["record_coverage"] = _record_coverage_check(df, expected_paper_ids)
+    checks.update({
         "paper_id_not_null": _not_null_check(df, "paper_id", total),
         "paper_id_unique": _unique_check(df, "paper_id", total),
         "title_not_null": _not_null_check(df, "title", total),
@@ -224,7 +265,7 @@ def run_data_quality_checks(
         "noise_free": _noise_check(df, total),
         "title_not_truncated": _truncated_title_check(df, total),
         "freshness": _freshness_check(df, settings, total),
-    }
+    })
 
     failed = [name for name, check in checks.items() if check["status"] == "fail"]
     result: dict[str, Any] = {
