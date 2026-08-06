@@ -207,13 +207,13 @@ Không đánh dấu hoàn thành nếu report mô tả kết quả không khớp
 
 ## 8. Definition of Done
 
-- [ ] Có danh sách thành viên, vai trò, phạm vi và output của từng người.
-- [ ] Mỗi deliverable có owner và output rõ ràng.
-- [ ] Một thành viên có thể chạy lại toàn bộ pipeline từ hướng dẫn chung.
-- [ ] `group_report.md` khớp với code, artifacts và metrics.
-- [ ] Mỗi thành viên có một `individual_report.md` riêng về vai trò và phần việc của mình.
-- [ ] Tất cả thành viên có thể giải thích luồng end-to-end và phần mình phụ trách.
-- [ ] Không có `.env`, API key hoặc secret trong repository, report hoặc log.
+- [x] Có danh sách thành viên, vai trò, phạm vi và output của từng người.
+- [x] Mỗi deliverable có owner và output rõ ràng.
+- [x] Một thành viên có thể chạy lại toàn bộ pipeline từ hướng dẫn chung.
+- [x] `group_report.md` khớp với code, artifacts và metrics.
+- [x] Mỗi thành viên có một `individual_report.md` riêng về vai trò và phần việc của mình.
+- [x] Tất cả thành viên có thể giải thích luồng end-to-end và phần mình phụ trách.
+- [x] Không có `.env`, API key hoặc secret trong repository, report hoặc log.
 
 ## 9. Nguyên tắc báo cáo trung thực
 
