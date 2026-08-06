@@ -1,6 +1,6 @@
 {
   "validation_type": "corrupted_dataset",
-  "validated_at_utc": "2026-08-06T05:56:38.970029+00:00",
+  "validated_at_utc": "2026-08-06T10:05:07.739603+00:00",
   "scenario_checks": {
     "drop_latest_records_detected": true,
     "blank_summary_detected": true,
@@ -18,7 +18,7 @@
     "text_for_embedding_consistent": true,
     "text_for_embedding_mismatch_rows": 0
   },
-  "expected_row_count": 24,
-  "actual_row_count": 24,
+  "expected_row_count": 22,
+  "actual_row_count": 22,
   "corruption_valid": true
 }

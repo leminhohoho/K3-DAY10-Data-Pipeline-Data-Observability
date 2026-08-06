@@ -28,7 +28,7 @@ def _metrics_table(metrics: dict[str, Any]) -> str:
         return "_No metrics available._"
     rows = []
     for key, value in metrics.items():
-        if key == "ragas":
+        if key == "ragas" or isinstance(value, (dict, list)):
             continue
         rows.append(f"| {_fmt_key(key)} | {_fmt_number(value)} |")
     lines = ["| Metric | Value |", "| --- | --- |", *rows]

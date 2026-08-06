@@ -111,12 +111,20 @@ class LocalEmbeddingIndex:
         )
 
         manifest_path = embeddings_output_path or settings.paths.embeddings_json
+        # Store the persist path relative to the project so the committed manifest
+        # stays machine-independent and does not leak a contributor's absolute path.
+        try:
+            persist_display = persist_path.resolve().relative_to(
+                settings.paths.project_dir.resolve()
+            ).as_posix()
+        except ValueError:
+            persist_display = persist_path.name
         write_json(
             manifest_path,
             {
                 "backend": "chroma",
                 "embedding_model": settings.embedding_model,
-                "persist_path": str(persist_path),
+                "persist_path": persist_display,
                 "collection_name": collection_name,
                 "documents": documents,
             },
@@ -131,11 +139,23 @@ class LocalEmbeddingIndex:
     @classmethod
     def load(cls, settings: Settings, embeddings_path: Path | None = None) -> "LocalEmbeddingIndex":
         payload = read_json(embeddings_path or settings.paths.embeddings_json)
+        # The manifest may store a relative (machine-independent) persist path, an
+        # absolute path from an older run, or none at all. Resolve it against the
+        # current project so reload works on any machine and falls back to the
+        # configured chroma directory.
+        stored_path = payload.get("persist_path")
+        if stored_path:
+            candidate = Path(stored_path)
+            persist_path = candidate if candidate.is_absolute() else settings.paths.project_dir / candidate
+            if not persist_path.exists():
+                persist_path = settings.paths.chroma_dir
+        else:
+            persist_path = settings.paths.chroma_dir
         return cls(
             settings=settings,
             collection_name=payload["collection_name"],
             documents=payload["documents"],
-            persist_path=Path(payload["persist_path"]),
+            persist_path=persist_path,
         )
 
     def search(self, query: str, top_k: int | None = None) -> list[SearchResult]:

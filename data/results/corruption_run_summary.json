@@ -1,45 +1,57 @@
 {
-  "baseline_rows": 24,
-  "corrupted_rows": 24,
-  "repaired_rows": 24,
+  "baseline_rows": 23,
+  "corrupted_rows": 22,
+  "repaired_rows": 23,
   "corruption_valid": true,
   "repair_valid": true,
   "baseline_metrics": {
     "samples": 16,
+    "answer_mode": "agent",
+    "answer_source_counts": {
+      "agent": 16
+    },
     "retrieval_hit_rate": 1.0,
-    "mean_token_f1": 1.0,
-    "judge_accuracy": 1.0,
-    "mean_judge_score": 5,
+    "mean_token_f1": 0.12956037212447813,
+    "judge_accuracy": 0.9375,
+    "mean_judge_score": 4.875,
     "ragas": {
       "skipped": "Set RUN_RAGAS=1 to enable the slower Ragas pass."
     }
   },
   "corrupted_metrics": {
     "samples": 16,
-    "retrieval_hit_rate": 0.5,
-    "mean_token_f1": 0.624375774900124,
-    "judge_accuracy": 0.5625,
-    "mean_judge_score": 3.375,
+    "answer_mode": "agent",
+    "answer_source_counts": {
+      "agent": 16
+    },
+    "retrieval_hit_rate": 0.25,
+    "mean_token_f1": 0.06861600704257145,
+    "judge_accuracy": 0.1875,
+    "mean_judge_score": 1.75,
     "ragas": {
       "skipped": "Set RUN_RAGAS=1 to enable the slower Ragas pass."
     }
   },
   "repaired_metrics": {
     "samples": 16,
+    "answer_mode": "agent",
+    "answer_source_counts": {
+      "agent": 16
+    },
     "retrieval_hit_rate": 1.0,
-    "mean_token_f1": 1.0,
-    "judge_accuracy": 1.0,
-    "mean_judge_score": 5,
+    "mean_token_f1": 0.09069169877561101,
+    "judge_accuracy": 0.9375,
+    "mean_judge_score": 4.8125,
     "ragas": {
       "skipped": "Set RUN_RAGAS=1 to enable the slower Ragas pass."
     }
   },
   "artifacts": {
-    "corruption_log": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\results\\corruption_log.json",
-    "corrupted_clean_json": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\clean\\papers_clean_corrupted.json",
-    "repaired_clean_json": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\clean\\papers_clean_repaired.json",
-    "corrupted_validation": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\quality\\corrupted_dataset_validation.json",
-    "repaired_validation": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\quality\\repaired_dataset_validation.json",
-    "comparison_report": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\reports\\corruption_report.md"
+    "corruption_log": "/Users/leminhohoho/repos/learning/K3-DAY10-Data-Pipeline-Data-Observability/data/results/corruption_log.json",
+    "corrupted_clean_json": "/Users/leminhohoho/repos/learning/K3-DAY10-Data-Pipeline-Data-Observability/data/clean/papers_clean_corrupted.json",
+    "repaired_clean_json": "/Users/leminhohoho/repos/learning/K3-DAY10-Data-Pipeline-Data-Observability/data/clean/papers_clean_repaired.json",
+    "corrupted_validation": "/Users/leminhohoho/repos/learning/K3-DAY10-Data-Pipeline-Data-Observability/data/quality/corrupted_dataset_validation.json",
+    "repaired_validation": "/Users/leminhohoho/repos/learning/K3-DAY10-Data-Pipeline-Data-Observability/data/quality/repaired_dataset_validation.json",
+    "comparison_report": "/Users/leminhohoho/repos/learning/K3-DAY10-Data-Pipeline-Data-Observability/data/reports/corruption_report.md"
   }
 }

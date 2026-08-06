@@ -1,0 +1,41 @@
+{
+  "report_name": "smoke_test",
+  "checked_at": "2026-08-06T03:14:40.291570+00:00",
+  "total_rows": 6,
+  "checks": {
+    "row_count": {
+      "status": "pass",
+      "value": 6,
+      "detail": "6 rows total"
+    },
+    "paper_id_not_null": {
+      "status": "fail",
+      "value": 5,
+      "detail": "1/6 rows missing or empty paper_id"
+    },
+    "paper_id_unique": {
+      "status": "pass",
+      "value": 6,
+      "detail": "0 duplicated paper_id values"
+    },
+    "title_not_null": {
+      "status": "pass",
+      "value": 6,
+      "detail": "0/6 rows missing or empty title"
+    },
+    "summary_length": {
+      "status": "pass",
+      "value": 6,
+      "detail": "0/6 rows with summary shorter than 20 chars"
+    },
+    "freshness": {
+      "status": "pass",
+      "value": 6,
+      "detail": "0/6 rows stale (> 180 days old)"
+    }
+  },
+  "failed_checks": [
+    "paper_id_not_null"
+  ],
+  "overall": "fail"
+}

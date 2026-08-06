@@ -10,8 +10,9 @@ from typing import Any
 from datasets import Dataset
 from pydantic import BaseModel, Field
 
-from core.config import Settings
+from core.config import Settings, require_llm_credentials
 from core.utils import normalize_whitespace, read_json, write_json
+from retrieval.agent import answer_with_agent, build_agent
 from retrieval.embeddings import MiniLMEmbeddings
 from retrieval.index import LocalEmbeddingIndex
 from retrieval.llm import build_llm
@@ -100,6 +101,17 @@ def _run_ragas(settings: Settings, answers: list[dict[str, Any]]) -> dict[str, A
         return {"error": f"Ragas evaluation failed: {exc}"}
 
 
+def _agent_enabled(settings: Settings) -> bool:
+    """The agent answers the eval unless disabled or credentials are missing."""
+    if os.getenv("EVAL_WITH_AGENT", "1").lower() not in {"1", "true", "yes"}:
+        return False
+    try:
+        require_llm_credentials(settings)
+    except RuntimeError:
+        return False
+    return True
+
+
 def evaluate_pipeline(
     settings: Settings,
     index: LocalEmbeddingIndex,
@@ -110,10 +122,38 @@ def evaluate_pipeline(
     test_set = read_json(test_set_path)
     answers: list[dict[str, Any]] = []
 
+    # The LangChain agent is the system under test: it reaches the same corpus
+    # through its tools, so its answers reflect data quality. Semantic retrieval
+    # is measured directly on the embedding index (not via exact title lookup),
+    # so retrieval_hit reflects vector-search quality, which corruption degrades.
+    agent = None
+    if _agent_enabled(settings):
+        try:
+            agent = build_agent(settings=settings, index=index)
+        except Exception:  # provider/SDK misconfiguration -> deterministic fallback
+            agent = None
+
     for item in test_set:
-        result = answer_question(item["question"], settings=settings, index=index)
-        judge = _judge_answer(settings, item["question"], item["ground_truth"], result.answer)
-        retrieval_hit = any(doc_id in item["ground_truth_doc_ids"] for doc_id in result.retrieved_doc_ids)
+        retrieved = index.search(item["question"], top_k=settings.top_k)
+        retrieved_doc_ids = [result.paper_id for result in retrieved]
+        retrieved_contexts = [result.content for result in retrieved]
+        retrieval_hit = any(doc_id in item["ground_truth_doc_ids"] for doc_id in retrieved_doc_ids)
+
+        agent_error: str | None = None
+        if agent is not None:
+            answer, agent_error = answer_with_agent(agent, item["question"])
+            if answer:
+                answer_source = "agent"
+            else:
+                # Quota exhausted or empty response: keep the run alive with the
+                # deterministic retrieval answer so artifacts are still produced.
+                answer = answer_question(item["question"], settings=settings, index=index).answer
+                answer_source = "retrieval_fallback"
+        else:
+            answer = answer_question(item["question"], settings=settings, index=index).answer
+            answer_source = "retrieval"
+
+        judge = _judge_answer(settings, item["question"], item["ground_truth"], answer)
         answers.append(
             {
                 "id": item["id"],
@@ -121,17 +161,25 @@ def evaluate_pipeline(
                 "question": item["question"],
                 "ground_truth": item["ground_truth"],
                 "ground_truth_doc_ids": item["ground_truth_doc_ids"],
-                "answer": result.answer,
-                "retrieved_doc_ids": result.retrieved_doc_ids,
-                "retrieved_contexts": result.retrieved_contexts,
+                "answer": answer,
+                "answer_source": answer_source,
+                "agent_error": agent_error,
+                "retrieved_doc_ids": retrieved_doc_ids,
+                "retrieved_contexts": retrieved_contexts,
                 "retrieval_hit": retrieval_hit,
-                "token_f1": _token_f1(item["ground_truth"], result.answer),
+                "token_f1": _token_f1(item["ground_truth"], answer),
                 "judge": judge.model_dump(),
             }
         )
 
+    source_counts: dict[str, int] = {}
+    for item in answers:
+        source_counts[item["answer_source"]] = source_counts.get(item["answer_source"], 0) + 1
+
     summary = {
         "samples": len(answers),
+        "answer_mode": "agent" if agent is not None else "retrieval",
+        "answer_source_counts": source_counts,
         "retrieval_hit_rate": mean(1.0 if item["retrieval_hit"] else 0.0 for item in answers),
         "mean_token_f1": mean(item["token_f1"] for item in answers),
         "judge_accuracy": mean(1.0 if item["judge"]["correct"] else 0.0 for item in answers),

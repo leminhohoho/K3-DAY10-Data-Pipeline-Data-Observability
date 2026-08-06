@@ -1,9 +1,13 @@
 {
   "samples": 16,
+  "answer_mode": "agent",
+  "answer_source_counts": {
+    "agent": 16
+  },
   "retrieval_hit_rate": 1.0,
-  "mean_token_f1": 1.0,
-  "judge_accuracy": 1.0,
-  "mean_judge_score": 5,
+  "mean_token_f1": 0.09069169877561101,
+  "judge_accuracy": 0.9375,
+  "mean_judge_score": 4.8125,
   "ragas": {
     "skipped": "Set RUN_RAGAS=1 to enable the slower Ragas pass."
   }
