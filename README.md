@@ -239,11 +239,11 @@ Mục tiêu không chỉ là pipeline chạy xong, mà phải có bằng chứng
 
 ## 8. Checklist trước khi nộp
 
-- [ ] Cài đặt được trên môi trường sạch bằng một trong hai cách ở trên
-- [ ] Baseline pipeline chạy end-to-end
-- [ ] Corruption flow chạy sau baseline
-- [ ] Có đầy đủ raw, clean, embedding, evaluation, quality và report artifacts
-- [ ] Metrics/report khớp với artifact thực tế
-- [ ] Chứng minh được before/corrupted/repaired bằng số liệu
-- [ ] Không có API key hoặc `.env` trong Git
-- [ ] Đã đối chiếu [Rubric.md](Rubric.md)
+- [x] Cài đặt được trên môi trường sạch bằng một trong hai cách ở trên
+- [x] Baseline pipeline chạy end-to-end
+- [x] Corruption flow chạy sau baseline
+- [x] Có đầy đủ raw, clean, embedding, evaluation, quality và report artifacts
+- [x] Metrics/report khớp với artifact thực tế
+- [x] Chứng minh được before/corrupted/repaired bằng số liệu
+- [x] Không có API key hoặc `.env` trong Git
+- [x] Đã đối chiếu [Rubric.md](Rubric.md)
