@@ -2,44 +2,44 @@
 
 ## 1. Thông tin cá nhân
 
-| Thông tin         | Nội dung                  |
-| ------------------ | -------------------------- |
-| Họ và tên       | [Điền họ tên đầy đủ] |
-| MSSV               | [Điền MSSV]                |
-| Khóa/Lớp         | K3                         |
-| Tên nhóm         | [Điền tên/mã nhóm]     |
-| Vai trò chính    | Thành viên 5 — Pipeline integration & evidence owner |
-| Repository         | https://github.com/leminhohoho/K3-DAY10-Data-Pipeline-Data-Observability (branch `feature/member5-pipeline-integration`) |
-| Ngày hoàn thành | 2026-08-06                 |
+| Thông tin         | Nội dung                                                                                                                 |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| Họ và tên       | Ngô Thành Đạt                                                                                                         |
+| MSSV               | 2A202601323                                                                                                               |
+| Khóa/Lớp         | K3                                                                                                                        |
+| Tên nhóm         |                                                                                                                           |
+| Vai trò chính    | Thành viên 5 — Pipeline integration & evidence owner                                                                   |
+| Repository         | https://github.com/leminhohoho/K3-DAY10-Data-Pipeline-Data-Observability (branch`feature/member5-pipeline-integration`) |
+| Ngày hoàn thành | 2026-08-06                                                                                                                |
 
 ## 2. Vai trò và phạm vi công việc
 
 ### Phần việc sở hữu
 
-| Module/deliverable | File/hàm phụ trách | Input nhận vào | Output bàn giao | Trạng thái |
-| ------------------ | --------------------- | ---------------- | ----------------- | ------------ |
-| Baseline orchestration | `src/pipelines/phase1.py` — `main()`, `_load_or_fetch_records`, `_validate_clean_dataframe`, `_load_or_build_test_set`, `_validate_test_set`, `_write_run_summary` | Raw records (TV1), `build_clean_dataframe` (TV2), `build_test_set` (TV2), `run_data_quality_checks`/`build_freshness_report`/`generate_phase1_report` (TV3) | `data/clean/`, `data/embeddings/`, `data/eval/test_set.json`, `data/results/baseline_metrics.json`, `baseline_answers.json`, `phase1_run_summary.json`, `data/reports/phase1_report.md` | Hoàn thành |
-| Agent demo & bằng chứng multi-provider | `src/pipelines/phase1.py` — `_build_demo_answers`, `_agent_credentials_status`, `_normalize_agent_text`, `_run_agent_question`, `_retry_delay_seconds` | `build_agent`/`run_agent_question` (starter), baseline index | `data/results/agent_demo_answers.json` (`agent_status: ok`, 4/4 câu) | Hoàn thành |
-| Corruption flow integration | `src/pipelines/corruption_flow.py` — resolve merge, `run_corruption_flow()` wiring, persist run summary | `corrupt_clean_dataframe`, `repair_from_raw_records`, `validate_corrupted_dataframe`, `validate_repaired_dataframe` (TV4) | `data/results/corruption_run_summary.json`, `corrupted_*`/`repaired_*` metrics + answers, `data/reports/corruption_report.md` | Hoàn thành |
-| Reproducibility & consistency check | Chạy lại end-to-end, đối chiếu report với artifact | Toàn bộ artifact trong `data/` | Xác nhận `baseline_metrics.json` khớp `corruption_run_summary.json` | Hoàn thành |
+| Module/deliverable                       | File/hàm phụ trách                                                                                                                                                             | Input nhận vào                                                                                                                                                     | Output bàn giao                                                                                                                                                                                      | Trạng thái |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| Baseline orchestration                   | `src/pipelines/phase1.py` — `main()`, `_load_or_fetch_records`, `_validate_clean_dataframe`, `_load_or_build_test_set`, `_validate_test_set`, `_write_run_summary` | Raw records (TV1),`build_clean_dataframe` (TV2), `build_test_set` (TV2), `run_data_quality_checks`/`build_freshness_report`/`generate_phase1_report` (TV3) | `data/clean/`, `data/embeddings/`, `data/eval/test_set.json`, `data/results/baseline_metrics.json`, `baseline_answers.json`, `phase1_run_summary.json`, `data/reports/phase1_report.md` | Hoàn thành |
+| Agent demo & bằng chứng multi-provider | `src/pipelines/phase1.py` — `_build_demo_answers`, `_agent_credentials_status`, `_normalize_agent_text`, `_run_agent_question`, `_retry_delay_seconds`               | `build_agent`/`run_agent_question` (starter), baseline index                                                                                                     | `data/results/agent_demo_answers.json` (`agent_status: ok`, 4/4 câu)                                                                                                                             | Hoàn thành |
+| Corruption flow integration              | `src/pipelines/corruption_flow.py` — resolve merge, `run_corruption_flow()` wiring, persist run summary                                                                      | `corrupt_clean_dataframe`, `repair_from_raw_records`, `validate_corrupted_dataframe`, `validate_repaired_dataframe` (TV4)                                    | `data/results/corruption_run_summary.json`, `corrupted_*`/`repaired_*` metrics + answers, `data/reports/corruption_report.md`                                                                 | Hoàn thành |
+| Reproducibility & consistency check      | Chạy lại end-to-end, đối chiếu report với artifact                                                                                                                          | Toàn bộ artifact trong`data/`                                                                                                                                    | Xác nhận`baseline_metrics.json` khớp `corruption_run_summary.json`                                                                                                                             | Hoàn thành |
 
 ### Việc hỗ trợ ngoài phạm vi chính
 
-| Hoạt động | Thành viên/module được hỗ trợ | Kết quả |
-| ----------- | -------------------------------- | --------- |
-| Phát hiện và sửa blocker ingestion | TV1 (`crossref.py`) / TV2 (`cleaning.py`) — sửa tại `src/core/config.py` | Thêm `until-pub-date` vào `source_filter`; clean dataframe từ 0 → 24 dòng |
-| Sửa cấu hình LLM provider | Cả nhóm — `.env`, `.env.example` | Đổi `LLM_MODEL` sang `gemini-flash-lite-latest`; LLM judge từ 0/48 → 48/48 lần chấm thật |
-| Resolve merge conflict | TV4 (`corruption_flow.py`) | Giữ bản tích hợp dùng API mới của TV4, thêm lại `corruption_run_summary.json` |
+| Hoạt động                           | Thành viên/module được hỗ trợ                                              | Kết quả                                                                                          |
+| -------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Phát hiện và sửa blocker ingestion | TV1 (`crossref.py`) / TV2 (`cleaning.py`) — sửa tại `src/core/config.py` | Thêm`until-pub-date` vào `source_filter`; clean dataframe từ 0 → 24 dòng                  |
+| Sửa cấu hình LLM provider           | Cả nhóm —`.env`, `.env.example`                                            | Đổi`LLM_MODEL` sang `gemini-flash-lite-latest`; LLM judge từ 0/48 → 48/48 lần chấm thật |
+| Resolve merge conflict                 | TV4 (`corruption_flow.py`)                                                      | Giữ bản tích hợp dùng API mới của TV4, thêm lại`corruption_run_summary.json`            |
 
 ## 3. Kết quả theo vai trò
 
-| Nhiệm vụ đã thực hiện | File/hàm/artifact liên quan | Kết quả bàn giao | Cách xác minh |
-| --------------------------- | ----------------------------- | ------------------- | --------------- |
-| Ghép baseline pipeline 8 bước | `phase1.py::main` | 24 clean rows, 16 test samples, collection `papers-baseline` | `python script/run_phase1.py` |
-| Validate contract trước khi build index | `_validate_clean_dataframe`, `_validate_test_set` | Fail-fast khi thiếu cột, `paper_id` rỗng/trùng, `text_for_embedding` rỗng, hoặc test set trỏ tới doc không tồn tại | Blocker mục 6 được phát hiện bằng đúng cơ chế này |
-| Chạy agent LangChain trên corpus | `_build_demo_answers` | `agent_demo_answers.json`: `agent_status: ok`, 4/4 câu có grounding | `jq .agent_status data/results/agent_demo_answers.json` |
-| Ghép corruption → evaluate → repair → compare | `corruption_flow.py::run_corruption_flow` | `corruption_valid: True`, `repair_valid: True` | `python script/run_corruption_flow.py` |
-| Đối chiếu report với artifact | `phase1_run_summary.json`, `corruption_run_summary.json` | Số trong báo cáo khớp file metrics | So sánh `baseline_metrics.json` với `corruption_run_summary.json` |
+| Nhiệm vụ đã thực hiện                       | File/hàm/artifact liên quan                                | Kết quả bàn giao                                                                                                              | Cách xác minh                                                        |
+| ------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Ghép baseline pipeline 8 bước                  | `phase1.py::main`                                          | 24 clean rows, 16 test samples, collection`papers-baseline`                                                                    | `python script/run_phase1.py`                                        |
+| Validate contract trước khi build index         | `_validate_clean_dataframe`, `_validate_test_set`        | Fail-fast khi thiếu cột,`paper_id` rỗng/trùng, `text_for_embedding` rỗng, hoặc test set trỏ tới doc không tồn tại | Blocker mục 6 được phát hiện bằng đúng cơ chế này          |
+| Chạy agent LangChain trên corpus                | `_build_demo_answers`                                      | `agent_demo_answers.json`: `agent_status: ok`, 4/4 câu có grounding                                                        | `jq .agent_status data/results/agent_demo_answers.json`              |
+| Ghép corruption → evaluate → repair → compare | `corruption_flow.py::run_corruption_flow`                  | `corruption_valid: True`, `repair_valid: True`                                                                               | `python script/run_corruption_flow.py`                               |
+| Đối chiếu report với artifact                 | `phase1_run_summary.json`, `corruption_run_summary.json` | Số trong báo cáo khớp file metrics                                                                                           | So sánh`baseline_metrics.json` với `corruption_run_summary.json` |
 
 Nêu một output cụ thể mà phần việc của tôi tạo ra hoặc giúp xác minh:
 
@@ -68,13 +68,13 @@ Lý do: nếu để lỗi trôi xuống, Chroma vẫn build được và evaluat
 
 ### Input, output và contract
 
-| Thành phần | Mô tả |
-| ------------ | ------- |
-| Input | `list[PaperRecord]` từ `data/raw/crossref_records.json`; clean schema 16 cột; test set schema `id`/`question_type`/`question`/`ground_truth`/`ground_truth_doc_ids` |
-| Output | Clean CSV+JSON, embedding manifest, test set, metrics + answers cho 3 trạng thái, quality/freshness JSON, 2 report Markdown, 2 run summary JSON |
-| Module phụ thuộc | `ingestion/crossref.py`, `ingestion/cleaning.py`, `ingestion/corruption.py`, `evaluation/testset.py`, `evaluation/metrics.py`, `observability/quality.py`, `observability/reporting.py`, `retrieval/index.py`, `retrieval/agent.py` |
-| Module sử dụng output | `script/run_phase1.py`, `script/run_corruption_flow.py`; báo cáo nhóm đọc `data/results/` và `data/reports/` |
-| Điều kiện lỗi cần xử lý | Raw snapshot thiếu; cleaning trả dataframe rỗng; test set trỏ tới doc đã biến mất; chạy corruption flow khi chưa có baseline; thiếu credential LLM; provider trả 404/429 |
+| Thành phần                   | Mô tả                                                                                                                                                                                                                                               |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input                          | `list[PaperRecord]` từ `data/raw/crossref_records.json`; clean schema 16 cột; test set schema `id`/`question_type`/`question`/`ground_truth`/`ground_truth_doc_ids`                                                                   |
+| Output                         | Clean CSV+JSON, embedding manifest, test set, metrics + answers cho 3 trạng thái, quality/freshness JSON, 2 report Markdown, 2 run summary JSON                                                                                                     |
+| Module phụ thuộc             | `ingestion/crossref.py`, `ingestion/cleaning.py`, `ingestion/corruption.py`, `evaluation/testset.py`, `evaluation/metrics.py`, `observability/quality.py`, `observability/reporting.py`, `retrieval/index.py`, `retrieval/agent.py` |
+| Module sử dụng output        | `script/run_phase1.py`, `script/run_corruption_flow.py`; báo cáo nhóm đọc `data/results/` và `data/reports/`                                                                                                                            |
+| Điều kiện lỗi cần xử lý | Raw snapshot thiếu; cleaning trả dataframe rỗng; test set trỏ tới doc đã biến mất; chạy corruption flow khi chưa có baseline; thiếu credential LLM; provider trả 404/429                                                                |
 
 ### Cách xác minh
 
@@ -107,7 +107,6 @@ python script/run_corruption_flow.py
       raise ValueError("Cleaning produced an empty dataframe.")
   ValueError: Cleaning produced an empty dataframe.
   ```
-
 - **Lệnh hoặc bước tái hiện:** `python script/run_phase1.py` với `data/raw/crossref_records.json` là snapshot lấy trước đó.
 - **Nguyên nhân gốc:** `source_filter` trong `src/core/config.py` chỉ đặt chặn dưới `from-pub-date`, trong khi Crossref trả về cả các số báo **đã lên lịch xuất bản trong tương lai**. Toàn bộ 22/22 record trong snapshot có `published` từ `2026-12-31` đến `2028-06-15`, còn ngày chạy là `2026-08-06`. `build_clean_dataframe` loại đúng mọi record `published > run_date` (đây là hành vi đúng), nên kết quả là dataframe rỗng. Lỗi nằm ở tầng ingestion chứ không ở cleaning hay pipeline.
 - **Cách xử lý:** Thêm chặn trên vào filter:
@@ -116,7 +115,6 @@ python script/run_corruption_flow.py
   source_until_date = today.isoformat()
   source_filter = f"from-pub-date:{source_from_date},until-pub-date:{source_until_date},has-abstract:true"
   ```
-
 - **Cách xác minh sau khi sửa:** Gọi thử Crossref với filter mới trả về 24 item đều có `issued = 2026-08-06`. Chạy lại `REFRESH_SOURCE=1 python script/run_phase1.py` cho 24 clean rows, 16 test samples, quality PASS toàn bộ 12 check và freshness `is_fresh: true` với 0/24 dòng stale.
 - **Điều học được:** Một pipeline "chạy không lỗi" vẫn có thể sai hoàn toàn ở tầng dữ liệu. Thứ cứu tình huống này không phải try/except mà là assertion đặt đúng chỗ — `_validate_clean_dataframe` biến một corpus rỗng âm thầm thành một lỗi dừng hẳn, kèm thông báo chỉ thẳng tới bước cần sửa. Ngoài ra, filter dữ liệu nên chặn cả hai đầu: nguồn "sống" như Crossref chứa cả dữ liệu tương lai lẫn quá khứ.
 
@@ -143,14 +141,14 @@ Ba tầng bằng chứng độc lập. Tầng dữ liệu: `data/quality/repaire
 
 ### Metrics chính
 
-| Metric/signal | Baseline | Corrupted | Repaired | Nhận xét của cá nhân |
-| ---------------------- | -------: | --------: | -------: | ------------------------- |
-| `retrieval_hit_rate` | 1.0000 | 0.5000 | 1.0000 | Mất đúng một nửa; nguyên nhân truy được về scenario cụ thể (xem dưới) |
-| `mean_token_f1` | 1.0000 | 0.6244 | 1.0000 | Giảm ít hơn hit rate vì một số câu vẫn "đoán trúng" từ tài liệu sai |
-| `judge_accuracy` | 1.0000 | 0.5625 | 1.0000 | Bám sát hit rate — LLM judge phạt đúng phần nội dung sai |
-| `mean_judge_score` | 5.00 | 3.3750 | 5.00 | Giảm 1.625 điểm trên thang 5 |
-| Quality checks | PASS (0/12 fail) | FAIL (5/12 fail) | PASS (0/12 fail) | 5 check fail ứng 1-1 với 5 scenario corruption |
-| Freshness status | fresh, 0/24 stale | **không fresh**, 3/24 stale | fresh, 0/24 stale | `oldest_published` lùi từ 2026-08-06 về 2021-08-06 |
+| Metric/signal          |          Baseline |                          Corrupted |          Repaired | Nhận xét của cá nhân                                                            |
+| ---------------------- | ----------------: | ---------------------------------: | ----------------: | ------------------------------------------------------------------------------------ |
+| `retrieval_hit_rate` |            1.0000 |                             0.5000 |            1.0000 | Mất đúng một nửa; nguyên nhân truy được về scenario cụ thể (xem dưới) |
+| `mean_token_f1`      |            1.0000 |                             0.6244 |            1.0000 | Giảm ít hơn hit rate vì một số câu vẫn "đoán trúng" từ tài liệu sai    |
+| `judge_accuracy`     |            1.0000 |                             0.5625 |            1.0000 | Bám sát hit rate — LLM judge phạt đúng phần nội dung sai                     |
+| `mean_judge_score`   |              5.00 |                             3.3750 |              5.00 | Giảm 1.625 điểm trên thang 5                                                     |
+| Quality checks         |  PASS (0/12 fail) |                   FAIL (5/12 fail) |  PASS (0/12 fail) | 5 check fail ứng 1-1 với 5 scenario corruption                                     |
+| Freshness status       | fresh, 0/24 stale | **không fresh**, 3/24 stale | fresh, 0/24 stale | `oldest_published` lùi từ 2026-08-06 về 2021-08-06                              |
 
 ### Kết luận từ số liệu
 
