@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-08-06T05:56:25.639356+00:00",
+  "collection_name": "papers-baseline",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-flash-lite-latest",
+  "agent_tools": [
+    "semantic_search_papers",
+    "lookup_paper"
+  ],
+  "agent_status": "ok",
+  "agent_note": null,
+  "samples": [
+    {
+      "id": "summary-001-10-1007-s00262-026-04505-w",
+      "question_type": "summary",
+      "question": "What is the main idea of 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis'?",
+      "retrieval_answer": "Peritoneal metastasis from gastrointestinal cancers has poor outcomes, and whole-abdominal radiotherapy (RT) is limited by toxicity to radiosensitive organs.",
+      "retrieved_doc_ids": [
+        "10.1007/s00262-026-04505-w",
+        "10.3389/fimmu.2026.1915946",
+        "10.3389/fonc.2026.1889467",
+        "10.3389/fendo.2026.1809624"
+      ],
+      "retrieved_titles": [
+        "Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis",
+        "An integrated multimodal model for early prediction of high-risk recurrence phenotype indicative of poor disease-free survival in stage IA NSCLC: a multicenter study",
+        "Breast implant-associated anaplastic large cell lymphoma: a case report and literature review",
+        "Synergistic prognostic value of transcription factor multiplicity and Ki-67 in pituitary neuroendocrine tumour recurrence after endoscopic transsphenoidal surgery: a novel tiered molecular risk model"
+      ],
+      "agent_answer": "Based on the study, the main idea is to evaluate whether combining **spatially fractionated radiotherapy (SFRT)**\u2014a radiation technique that delivers heterogeneous doses to spare normal tissues\u2014with **PD-L1 blockade (immunotherapy)** can improve both antitumor efficacy and safety in a preclinical model of peritoneal metastasis (from gastrointestinal cancers). \n\nKey findings and concepts of the paper include:\n* **Improved Safety and Reduced Toxicity:** Conventional whole-abdominal radiotherapy (CONV RT) is typically limited by severe toxicity to radiosensitive organs in the abdomen. SFRT significantly reduced normal tissue toxicity (such as preventing early mortality and maintaining weight and intestinal length) while achieving comparable or superior tumor control.\n* **Synergistic Antitumor Efficacy:** Combining SFRT with anti-PD-L1 immunotherapy induced near-complete tumor regression and significantly reduced ascites in the peritoneal metastasis model.\n* **Immune Modulation:** SFRT stimulated antitumor immunity by increasing CD4\u207a/CD8\u207a T cells and M1 macrophages. Adding the PD-L1 blockade further expanded T-cell populations and optimized the neutrophil-to-lymphocyte ratio.\n* **Functional Preservation:** Mice receiving the combination of SFRT and PD-L1 blockade demonstrated better physical performance and locomotion in behavioral testing.\n\nIn short, the study demonstrates that SFRT combined with PD-L1 blockade is a safer, highly effective immuno-radiotherapy strategy for treating challenging peritoneal metastases while sparing healthy tissues.",
+      "agent_error": null
+    },
+    {
+      "id": "authors-002-10-1007-s00262-026-04505-w",
+      "question_type": "authors",
+      "question": "Who authored 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis'?",
+      "retrieval_answer": "Sung Eun Lee, Changhoon Choi, Yeeun Kim, Taehyung Kim, Sung Jin Kim, Sang Hoon Jung, Jeong Il Yu",
+      "retrieved_doc_ids": [
+        "10.1007/s00262-026-04505-w",
+        "10.3389/fimmu.2026.1915946",
+        "10.3389/fonc.2026.1889467",
+        "10.3389/fendo.2026.1809624"
+      ],
+      "retrieved_titles": [
+        "Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis",
+        "An integrated multimodal model for early prediction of high-risk recurrence phenotype indicative of poor disease-free survival in stage IA NSCLC: a multicenter study",
+        "Breast implant-associated anaplastic large cell lymphoma: a case report and literature review",
+        "Synergistic prognostic value of transcription factor multiplicity and Ki-67 in pituitary neuroendocrine tumour recurrence after endoscopic transsphenoidal surgery: a novel tiered molecular risk model"
+      ],
+      "agent_answer": "The authors of the paper \"Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis\" are:\n\n* Sung Eun Lee\n* Changhoon Choi\n* Yeeun Kim\n* Taehyung Kim\n* Sung Jin Kim\n* Sang Hoon Jung\n* Jeong Il Yu",
+      "agent_error": null
+    },
+    {
+      "id": "date-003-10-1007-s00262-026-04505-w",
+      "question_type": "date",
+      "question": "When was 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis' published?",
+      "retrieval_answer": "2026-08-06",
+      "retrieved_doc_ids": [
+        "10.1007/s00262-026-04505-w",
+        "10.3389/fimmu.2026.1915946",
+        "10.3389/fonc.2026.1889467",
+        "10.3389/fendo.2026.1809624"
+      ],
+      "retrieved_titles": [
+        "Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis",
+        "An integrated multimodal model for early prediction of high-risk recurrence phenotype indicative of poor disease-free survival in stage IA NSCLC: a multicenter study",
+        "Breast implant-associated anaplastic large cell lymphoma: a case report and literature review",
+        "Synergistic prognostic value of transcription factor multiplicity and Ki-67 in pituitary neuroendocrine tumour recurrence after endoscopic transsphenoidal surgery: a novel tiered molecular risk model"
+      ],
+      "agent_answer": "The paper \"Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis\" was published on **August 6, 2026**.",
+      "agent_error": null
+    },
+    {
+      "id": "categories-004-10-1007-s00262-026-04505-w",
+      "question_type": "categories",
+      "question": "What categories does 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis' belong to?",
+      "retrieval_answer": "Cancer Immunology, Immunotherapy, journal-article",
+      "retrieved_doc_ids": [
+        "10.1007/s00262-026-04505-w",
+        "10.3389/fimmu.2026.1915946",
+        "10.3389/fonc.2026.1889467",
+        "10.3389/fendo.2026.1809624"
+      ],
+      "retrieved_titles": [
+        "Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis",
+        "An integrated multimodal model for early prediction of high-risk recurrence phenotype indicative of poor disease-free survival in stage IA NSCLC: a multicenter study",
+        "Breast implant-associated anaplastic large cell lymphoma: a case report and literature review",
+        "Synergistic prognostic value of transcription factor multiplicity and Ki-67 in pituitary neuroendocrine tumour recurrence after endoscopic transsphenoidal surgery: a novel tiered molecular risk model"
+      ],
+      "agent_answer": "The categories for the paper \"Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis\" are:\n\n* **Cancer Immunology**\n* **Immunotherapy**\n* **journal-article**",
+      "agent_error": null
+    }
+  ]
+}

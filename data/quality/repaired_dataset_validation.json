@@ -1,0 +1,23 @@
+{
+  "validation_type": "repaired_dataset",
+  "validated_at_utc": "2026-08-06T05:57:38.092454+00:00",
+  "checks": {
+    "row_count_match": true,
+    "paper_id_set_match": true,
+    "paper_id_unique": true,
+    "content_digest_match": true,
+    "no_corruption_noise": true,
+    "no_truncated_titles": true,
+    "summary_chars_consistent": true,
+    "age_days_consistent": true,
+    "text_for_embedding_consistent": true
+  },
+  "missing_paper_ids": [],
+  "unexpected_paper_ids": [],
+  "duplicate_rows": 0,
+  "noisy_summary_rows": 0,
+  "truncated_title_rows": 0,
+  "repaired_digest": "3eedba95e876b1bf7a8abed34220f74980b778972ee5e8063701c5d8fe10b1cc",
+  "reference_digest": "3eedba95e876b1bf7a8abed34220f74980b778972ee5e8063701c5d8fe10b1cc",
+  "repair_valid": true
+}

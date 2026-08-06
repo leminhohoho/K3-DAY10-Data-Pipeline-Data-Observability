@@ -1,0 +1,10 @@
+{
+  "latest_published": "2026-08-06T00:00:00+00:00",
+  "oldest_published": "2026-08-06T00:00:00+00:00",
+  "stale_rows": 0,
+  "fresh_rows": 24,
+  "total_rows": 24,
+  "is_fresh": true,
+  "threshold_days": 180,
+  "generated_at_utc": "2026-08-06T05:58:30.172692+00:00"
+}

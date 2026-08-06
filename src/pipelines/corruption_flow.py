@@ -235,6 +235,15 @@ def run_corruption_flow(
         },
     }
 
+    # Persisted counterpart of `phase1_run_summary.json`: one machine-readable
+    # file tying the three states, their metrics and their validations together,
+    # so report claims can be diffed against artifacts without re-running.
+    run_summary_path = (
+        effective_settings.paths.baseline_metrics.parent / "corruption_run_summary.json"
+    )
+    write_json(run_summary_path, result)
+    result["artifacts"]["run_summary"] = str(run_summary_path)
+
     if not corrupted_validation["corruption_valid"]:
         raise RuntimeError(
             f"Corrupted dataset validation failed. See {corrupted_validation_path}."
@@ -255,6 +264,7 @@ def main() -> None:
     print(f"Corruption valid: {result['corruption_valid']}")
     print(f"Repair valid: {result['repair_valid']}")
     print(f"Comparison report: {result['artifacts']['comparison_report']}")
+    print(f"Run summary: {result['artifacts']['run_summary']}")
 
 
 if __name__ == "__main__":

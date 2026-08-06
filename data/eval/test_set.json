@@ -1,0 +1,146 @@
+[
+  {
+    "id": "summary-001-10-1007-s00262-026-04505-w",
+    "question_type": "summary",
+    "question": "What is the main idea of 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis'?",
+    "ground_truth": "Peritoneal metastasis from gastrointestinal cancers has poor outcomes, and whole-abdominal radiotherapy (RT) is limited by toxicity to radiosensitive organs.",
+    "ground_truth_doc_ids": [
+      "10.1007/s00262-026-04505-w"
+    ]
+  },
+  {
+    "id": "authors-002-10-1007-s00262-026-04505-w",
+    "question_type": "authors",
+    "question": "Who authored 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis'?",
+    "ground_truth": "Sung Eun Lee, Changhoon Choi, Yeeun Kim, Taehyung Kim, Sung Jin Kim, Sang Hoon Jung, Jeong Il Yu",
+    "ground_truth_doc_ids": [
+      "10.1007/s00262-026-04505-w"
+    ]
+  },
+  {
+    "id": "date-003-10-1007-s00262-026-04505-w",
+    "question_type": "date",
+    "question": "When was 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis' published?",
+    "ground_truth": "2026-08-06",
+    "ground_truth_doc_ids": [
+      "10.1007/s00262-026-04505-w"
+    ]
+  },
+  {
+    "id": "categories-004-10-1007-s00262-026-04505-w",
+    "question_type": "categories",
+    "question": "What categories does 'Spatially fractionated radiotherapy with PD-L1 blockade achieves superior antitumor efficacy and safety in a preclinical model of peritoneal metastasis' belong to?",
+    "ground_truth": "Cancer Immunology, Immunotherapy, journal-article",
+    "ground_truth_doc_ids": [
+      "10.1007/s00262-026-04505-w"
+    ]
+  },
+  {
+    "id": "summary-005-10-1007-s44020-026-00124-1",
+    "question_type": "summary",
+    "question": "What is the main idea of 'The \u2018how long\u2019 question: EAL students\u2019 progression through phases of English language development in Australian schools'?",
+    "ground_truth": "This article addresses the question of how long it takes students who are learning English as an additional language (EAL) in the Australian context to develop the level of English necessary for equitable participation in the curriculum.",
+    "ground_truth_doc_ids": [
+      "10.1007/s44020-026-00124-1"
+    ]
+  },
+  {
+    "id": "authors-006-10-1007-s44020-026-00124-1",
+    "question_type": "authors",
+    "question": "Who authored 'The \u2018how long\u2019 question: EAL students\u2019 progression through phases of English language development in Australian schools'?",
+    "ground_truth": "Lucy Lu, Jennifer Hammond, Olivia Groves, Wai Yin Wan",
+    "ground_truth_doc_ids": [
+      "10.1007/s44020-026-00124-1"
+    ]
+  },
+  {
+    "id": "date-007-10-1007-s44020-026-00124-1",
+    "question_type": "date",
+    "question": "When was 'The \u2018how long\u2019 question: EAL students\u2019 progression through phases of English language development in Australian schools' published?",
+    "ground_truth": "2026-08-06",
+    "ground_truth_doc_ids": [
+      "10.1007/s44020-026-00124-1"
+    ]
+  },
+  {
+    "id": "categories-008-10-1007-s44020-026-00124-1",
+    "question_type": "categories",
+    "question": "What categories does 'The \u2018how long\u2019 question: EAL students\u2019 progression through phases of English language development in Australian schools' belong to?",
+    "ground_truth": "The Australian Journal of Language and Literacy, journal-article",
+    "ground_truth_doc_ids": [
+      "10.1007/s44020-026-00124-1"
+    ]
+  },
+  {
+    "id": "summary-009-10-1093-9780197900413-003-0003",
+    "question_type": "summary",
+    "question": "What is the main idea of 'The Mixture Model of Politics'?",
+    "ground_truth": "This chapter develops the mixture model of politics.",
+    "ground_truth_doc_ids": [
+      "10.1093/9780197900413.003.0003"
+    ]
+  },
+  {
+    "id": "authors-010-10-1093-9780197900413-003-0003",
+    "question_type": "authors",
+    "question": "Who authored 'The Mixture Model of Politics'?",
+    "ground_truth": "Jens Ledet Jensen, Peter B Mortensen, S\u00f8ren Serritzlew",
+    "ground_truth_doc_ids": [
+      "10.1093/9780197900413.003.0003"
+    ]
+  },
+  {
+    "id": "date-011-10-1093-9780197900413-003-0003",
+    "question_type": "date",
+    "question": "When was 'The Mixture Model of Politics' published?",
+    "ground_truth": "2026-08-06",
+    "ground_truth_doc_ids": [
+      "10.1093/9780197900413.003.0003"
+    ]
+  },
+  {
+    "id": "categories-012-10-1093-9780197900413-003-0003",
+    "question_type": "categories",
+    "question": "What categories does 'The Mixture Model of Politics' belong to?",
+    "ground_truth": "Understanding Policy Changes, book-chapter",
+    "ground_truth_doc_ids": [
+      "10.1093/9780197900413.003.0003"
+    ]
+  },
+  {
+    "id": "summary-013-10-1093-9780197900413-003-0004",
+    "question_type": "summary",
+    "question": "What is the main idea of 'The Comparative Distributional Method'?",
+    "ground_truth": "The chapter introduces the Comparative Distributional Method (CDM) as a statistical approach for analysing policy change distributions.",
+    "ground_truth_doc_ids": [
+      "10.1093/9780197900413.003.0004"
+    ]
+  },
+  {
+    "id": "authors-014-10-1093-9780197900413-003-0004",
+    "question_type": "authors",
+    "question": "Who authored 'The Comparative Distributional Method'?",
+    "ground_truth": "Jens Ledet Jensen, Peter B Mortensen, S\u00f8ren Serritzlew",
+    "ground_truth_doc_ids": [
+      "10.1093/9780197900413.003.0004"
+    ]
+  },
+  {
+    "id": "date-015-10-1093-9780197900413-003-0004",
+    "question_type": "date",
+    "question": "When was 'The Comparative Distributional Method' published?",
+    "ground_truth": "2026-08-06",
+    "ground_truth_doc_ids": [
+      "10.1093/9780197900413.003.0004"
+    ]
+  },
+  {
+    "id": "categories-016-10-1093-9780197900413-003-0004",
+    "question_type": "categories",
+    "question": "What categories does 'The Comparative Distributional Method' belong to?",
+    "ground_truth": "Understanding Policy Changes, book-chapter",
+    "ground_truth_doc_ids": [
+      "10.1093/9780197900413.003.0004"
+    ]
+  }
+]

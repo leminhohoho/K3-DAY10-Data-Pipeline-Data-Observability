@@ -1,0 +1,41 @@
+{
+  "pipeline": "phase1_baseline",
+  "started_at": "2026-08-06T05:55:08.969931+00:00",
+  "completed_at": "2026-08-06T05:56:25.665318+00:00",
+  "source_mode": "cached_raw_snapshot",
+  "test_set_mode": "cached",
+  "raw_record_count": 24,
+  "clean_row_count": 24,
+  "collection_name": "papers-baseline",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "llm_provider": "gemini",
+  "llm_model": "gemini-flash-lite-latest",
+  "agent_status": "ok",
+  "agent_note": null,
+  "top_k": 4,
+  "metrics": {
+    "samples": 16,
+    "retrieval_hit_rate": 1.0,
+    "mean_token_f1": 1.0,
+    "judge_accuracy": 1.0,
+    "mean_judge_score": 5,
+    "ragas": {
+      "skipped": "Set RUN_RAGAS=1 to enable the slower Ragas pass."
+    }
+  },
+  "quality_overall": "pass",
+  "freshness_is_fresh": true,
+  "artifacts": {
+    "raw_api_response": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\raw\\crossref_response.json",
+    "raw_records": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\raw\\crossref_records.json",
+    "clean_csv": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\clean\\papers_clean.csv",
+    "clean_json": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\clean\\papers_clean.json",
+    "embedding_manifest": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\embeddings\\papers_embeddings.json",
+    "test_set": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\eval\\test_set.json",
+    "metrics": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\results\\baseline_metrics.json",
+    "answers": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\results\\baseline_answers.json",
+    "demo_answers": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\results\\agent_demo_answers.json",
+    "freshness": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\quality\\freshness_report.json",
+    "report": "C:\\Users\\ADMIN\\Desktop\\VinUniSchool\\Day10\\K3-DAY10-Data-Pipeline-Data-Observability\\data\\reports\\phase1_report.md"
+  }
+}

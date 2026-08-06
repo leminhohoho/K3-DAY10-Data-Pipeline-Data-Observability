@@ -1,0 +1,24 @@
+{
+  "validation_type": "corrupted_dataset",
+  "validated_at_utc": "2026-08-06T05:56:38.970029+00:00",
+  "scenario_checks": {
+    "drop_latest_records_detected": true,
+    "blank_summary_detected": true,
+    "noise_detected": true,
+    "truncated_title_detected": true,
+    "stale_date_detected": true,
+    "duplicate_rows_detected": true,
+    "row_count_matches_log": true
+  },
+  "derived_column_checks": {
+    "summary_chars_consistent": true,
+    "summary_chars_mismatch_rows": 0,
+    "age_days_consistent": true,
+    "age_days_mismatch_rows": 0,
+    "text_for_embedding_consistent": true,
+    "text_for_embedding_mismatch_rows": 0
+  },
+  "expected_row_count": 24,
+  "actual_row_count": 24,
+  "corruption_valid": true
+}
