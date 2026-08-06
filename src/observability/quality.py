@@ -7,10 +7,14 @@ import pandas as pd
 
 from core.config import Settings
 from core.utils import now_utc, safe_slug, write_json
+from ingestion.corruption import (
+    NOISE_MARKERS,
+    infer_run_date_from_clean_dataframe,
+    rebuild_derived_columns,
+)
 
 
 def _present_count(df: pd.DataFrame, column: str) -> int:
-    """Number of rows where ``column`` has a non-empty string value."""
     if column not in df.columns:
         return 0
     mask = df[column].notna()
@@ -29,28 +33,138 @@ def _not_null_check(df: pd.DataFrame, column: str, total: int) -> dict[str, Any]
 
 def _unique_check(df: pd.DataFrame, column: str, total: int) -> dict[str, Any]:
     if column not in df.columns:
-        duplicates = total
+        duplicate_rows = total
+        unique_values = 0
     else:
-        duplicates = int(df[column].dropna().duplicated().sum())
+        values = df[column].fillna("").astype(str).str.strip().str.casefold()
+        duplicate_rows = int(values[values.ne("")].duplicated(keep=False).sum())
+        unique_values = int(values[values.ne("")].nunique())
     return {
-        "status": "pass" if duplicates == 0 else "fail",
-        "value": total - duplicates,
-        "detail": f"{duplicates} duplicated {column} values",
+        "status": "pass" if duplicate_rows == 0 else "fail",
+        "value": unique_values,
+        "detail": f"{duplicate_rows} rows belong to duplicated {column} groups",
     }
 
 
-def _summary_length_check(df: pd.DataFrame, total: int, min_chars: int = 20) -> dict[str, Any]:
-    if "summary_chars" in df.columns:
-        lengths = pd.to_numeric(df["summary_chars"], errors="coerce").fillna(0).astype(int)
-    elif "summary" in df.columns:
+def _summary_length_check(
+    df: pd.DataFrame,
+    total: int,
+    min_chars: int = 20,
+) -> dict[str, Any]:
+    # Measure the actual summary, not summary_chars, so stale derived metadata
+    # cannot hide a blank-summary corruption.
+    if "summary" in df.columns:
         lengths = df["summary"].fillna("").astype(str).str.len()
     else:
         lengths = pd.Series([0] * total, index=df.index)
-    empty = int((lengths < min_chars).sum())
+    short = int((lengths < min_chars).sum())
     return {
-        "status": "pass" if empty == 0 else "fail",
+        "status": "pass" if short == 0 else "fail",
         "value": int((lengths >= min_chars).sum()),
-        "detail": f"{empty}/{total} rows with summary shorter than {min_chars} chars",
+        "detail": f"{short}/{total} rows with summary shorter than {min_chars} chars",
+    }
+
+
+def _summary_chars_consistency_check(df: pd.DataFrame, total: int) -> dict[str, Any]:
+    if "summary" not in df.columns or "summary_chars" not in df.columns:
+        mismatch = total
+    else:
+        expected = df["summary"].fillna("").astype(str).str.len().astype("Int64")
+        actual = pd.to_numeric(df["summary_chars"], errors="coerce").astype("Int64")
+        mismatch = int((expected != actual).fillna(True).sum())
+    return {
+        "status": "pass" if mismatch == 0 else "fail",
+        "value": total - mismatch,
+        "detail": f"{mismatch}/{total} rows have inconsistent summary_chars",
+    }
+
+
+def _published_validity_check(df: pd.DataFrame, total: int) -> dict[str, Any]:
+    if "published" not in df.columns:
+        invalid = total
+    else:
+        invalid = int(pd.to_datetime(df["published"], errors="coerce", utc=True).isna().sum())
+    return {
+        "status": "pass" if invalid == 0 else "fail",
+        "value": total - invalid,
+        "detail": f"{invalid}/{total} rows have an invalid published date",
+    }
+
+
+def _age_days_consistency_check(df: pd.DataFrame, total: int) -> dict[str, Any]:
+    required = {"published", "age_days"}
+    if not required.issubset(df.columns):
+        mismatch = total
+    else:
+        run_date = infer_run_date_from_clean_dataframe(df)
+        published = pd.to_datetime(df["published"], errors="coerce", utc=True)
+        run_timestamp = pd.Timestamp(run_date)
+        if run_timestamp.tzinfo is None:
+            run_timestamp = run_timestamp.tz_localize("UTC")
+        else:
+            run_timestamp = run_timestamp.tz_convert("UTC")
+        expected = (run_timestamp.normalize() - published.dt.normalize()).dt.days.astype("Int64")
+        actual = pd.to_numeric(df["age_days"], errors="coerce").astype("Int64")
+        mismatch = int((expected != actual).fillna(True).sum())
+    return {
+        "status": "pass" if mismatch == 0 else "fail",
+        "value": total - mismatch,
+        "detail": f"{mismatch}/{total} rows have age_days inconsistent with published",
+    }
+
+
+def _embedding_consistency_check(df: pd.DataFrame, total: int) -> dict[str, Any]:
+    required = {
+        "title",
+        "summary",
+        "published",
+        "authors_joined",
+        "categories_joined",
+        "text_for_embedding",
+    }
+    if not required.issubset(df.columns):
+        mismatch = total
+    else:
+        expected = rebuild_derived_columns(
+            df,
+            run_date=infer_run_date_from_clean_dataframe(df),
+        )["text_for_embedding"].fillna("").astype(str)
+        actual = df["text_for_embedding"].fillna("").astype(str)
+        mismatch = int((expected != actual).sum())
+    return {
+        "status": "pass" if mismatch == 0 else "fail",
+        "value": total - mismatch,
+        "detail": f"{mismatch}/{total} rows have stale text_for_embedding",
+    }
+
+
+def _noise_check(df: pd.DataFrame, total: int) -> dict[str, Any]:
+    if "summary" not in df.columns:
+        noisy = total
+    else:
+        noisy = int(
+            df["summary"]
+            .fillna("")
+            .astype(str)
+            .map(lambda text: any(marker in text for marker in NOISE_MARKERS))
+            .sum()
+        )
+    return {
+        "status": "pass" if noisy == 0 else "fail",
+        "value": total - noisy,
+        "detail": f"{noisy}/{total} rows contain known corruption noise",
+    }
+
+
+def _truncated_title_check(df: pd.DataFrame, total: int) -> dict[str, Any]:
+    if "title" not in df.columns:
+        truncated = total
+    else:
+        truncated = int(df["title"].fillna("").astype(str).str.endswith("...").sum())
+    return {
+        "status": "pass" if truncated == 0 else "fail",
+        "value": total - truncated,
+        "detail": f"{truncated}/{total} titles end with the corruption truncation marker",
     }
 
 
@@ -86,19 +200,13 @@ def _freshness_check(df: pd.DataFrame, settings: Settings, total: int) -> dict[s
     }
 
 
-def run_data_quality_checks(df: pd.DataFrame, settings: Settings, report_name: str) -> dict[str, Any]:
-    """TODO(student): tao bo data quality checks.
-
-    Pseudo-code:
-    1. Check row count.
-    2. Check `paper_id` not null va unique.
-    3. Check `title` not null.
-    4. Check do dai `summary`.
-    5. Check freshness bang `age_days`.
-    6. Ghi ket qua vao `data/quality/`.
-    """
+def run_data_quality_checks(
+    df: pd.DataFrame,
+    settings: Settings,
+    report_name: str,
+) -> dict[str, Any]:
+    """Run reproducible quality checks and persist the JSON artifact."""
     total = int(len(df))
-
     checks: dict[str, dict[str, Any]] = {
         "row_count": {
             "status": "pass" if total > 0 else "fail",
@@ -109,6 +217,12 @@ def run_data_quality_checks(df: pd.DataFrame, settings: Settings, report_name: s
         "paper_id_unique": _unique_check(df, "paper_id", total),
         "title_not_null": _not_null_check(df, "title", total),
         "summary_length": _summary_length_check(df, total),
+        "summary_chars_consistency": _summary_chars_consistency_check(df, total),
+        "published_valid": _published_validity_check(df, total),
+        "age_days_consistency": _age_days_consistency_check(df, total),
+        "embedding_text_consistency": _embedding_consistency_check(df, total),
+        "noise_free": _noise_check(df, total),
+        "title_not_truncated": _truncated_title_check(df, total),
         "freshness": _freshness_check(df, settings, total),
     }
 
@@ -138,19 +252,7 @@ def _to_utc_datetime(value: Any) -> Any:
 
 
 def build_freshness_report(df: pd.DataFrame, settings: Settings, report_path) -> dict[str, Any]:
-    """TODO(student): tong hop freshness report.
-
-    Pseudo-code:
-    1. Tim latest va oldest published date.
-    2. Dem so dong stale.
-    3. Tao payload:
-       - latest_published
-       - oldest_published
-       - stale_rows
-       - total_rows
-       - is_fresh
-    4. Ghi JSON report.
-    """
+    """Build and optionally persist a freshness summary."""
     dates: list[Any] = []
     if "published" in df.columns:
         converted = [_to_utc_datetime(value) for value in df["published"]]
@@ -162,9 +264,11 @@ def build_freshness_report(df: pd.DataFrame, settings: Settings, report_path) ->
         "latest_published": max(dates).isoformat() if dates else None,
         "oldest_published": min(dates).isoformat() if dates else None,
         "stale_rows": stale,
+        "fresh_rows": max(0, total - stale),
         "total_rows": total,
         "is_fresh": stale == 0 and total > 0,
         "threshold_days": settings.freshness_threshold_days,
+        "generated_at_utc": now_utc().isoformat(),
     }
 
     if report_path is not None:
